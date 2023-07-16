@@ -51,7 +51,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>org.manager.app.Main</mainClass>
+                            <mainClass>org.manager.app.starter.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
