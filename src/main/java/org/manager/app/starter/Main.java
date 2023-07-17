@@ -3,40 +3,69 @@ package org.manager.app.starter;
 import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Main {
+    private static Logger logger = LogManager.getLogger(Main.class);
     public static void main(String[] args) {
         LocalTime time = LocalTime.now();
         int hour = time.getHour();
-        int period = getPeriod(hour);
+        String period = getPeriod(hour);
         Locale currentLocale = Locale.getDefault();
         Locale.setDefault(new Locale("en", "GB"));
-        //Locale locale = new Locale("af", "ZA");
+        //Locale locale = new Locale("en", "US");
         Locale locale = currentLocale;
-        ResourceBundle bundle = ResourceBundle.getBundle("resources", locale);
         switch (period){
-            case 1:
-                System.out.println(bundle.getString("morning") + " - 6:00 - 9:00");
-            case 2:
-                System.out.println(bundle.getString("day") + " - 9:00 - 19:00");
-            case 3:
-                System.out.println(bundle.getString("evening") + " - 19:00 - 23:00");
-            case 4:
-                System.out.println(bundle.getString("night") + " - 23:00 - 6:00");
+            case "morning":
+                String resultM = getBundleByLocale(locale, period) + " - 6:00 - 9:00";
+                System.out.println("\n" + resultM + "\n");
+                logger.info("User's locale: " + locale + ", Greeting for user: " + resultM);
+                break;
+            case "day":
+                String resultD = getBundleByLocale(locale, period) + " - 9:00 - 19:00";
+                System.out.println("\n" + resultD + "\n");
+                logger.info("User's locale: " + locale + ", Greeting for user: " + resultD);
+                break;
+            case "evening":
+                String resultE = getBundleByLocale(locale, period) + " - 19:00 - 23:00";
+                System.out.println("\n" + resultE + "\n");
+                logger.info("User's locale: " + locale + ", Greeting for user: " + resultE);
+                break;
+            case "night":
+                String resultN = getBundleByLocale(locale, period) + " - 23:00 - 6:00";
+                System.out.println("\n" + resultN + "\n");
+                logger.info("User's locale: " + locale + ", Greeting for user: " + resultN);
+                break;
         }
     }
 
-    public static int getPeriod(int hour){
-        int period = 0;
+    /**
+     * This method gives user period of the day
+     * @param hour - hour of current time
+     * @return period of the day
+     */
+    public static String getPeriod(int hour){
+        String period;
         if(hour >= 6 && hour < 9)
-            period = 1;
+            period = "morning";
         else if (hour >= 9 && hour < 19)
-            period = 2;
+            period = "day";
         else if (hour >= 19 && hour < 23)
-            period = 3;
+            period = "evening";
         else
-            period = 4;
+            period = "night";
         return period;
+    }
+
+    /**
+     * This method gives user bundle by locale
+     * @param locale - current locale
+     * @param period - period of the day
+     * @return string on language of current locale or default language
+     */
+    public static String getBundleByLocale(Locale locale, String period){
+        ResourceBundle bundle = ResourceBundle.getBundle("resources", locale);
+        return bundle.getString(period);
     }
 }
