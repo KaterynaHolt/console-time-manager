@@ -1,9 +1,9 @@
 package org.manager.app.model;
 
 public class PeriodOfDay {
-    private int lowLimit;
-    private int highLimit;
-    private String period;
+    private final int lowLimit;
+    private final int highLimit;
+    private final String period;
     public PeriodOfDay(int lowLimit, int highLimit, String period){
         this.lowLimit = lowLimit;
         this.highLimit = highLimit;

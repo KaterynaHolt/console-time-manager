@@ -1,12 +1,12 @@
-package org.manager.app.starter;
-
+package org.manager.app.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.manager.app.service.PeriodsStore;
+
 import java.util.Locale;
 
-public class MainTest {
+public class MessageUtilsTest {
     /**
      * This method tests getting greeting to user - getGreeting
      */
@@ -19,11 +19,15 @@ public class MainTest {
         Locale localeRU = new Locale("ru", "RU");
         Locale localeZA = new Locale("af", "ZA");
         Locale.setDefault(new Locale("en", "GB"));
+        MessageUtils messUA = new MessageUtils(periodsStore, localeUA);
+        MessageUtils messGB = new MessageUtils(periodsStore, localeGB);
+        MessageUtils messRU = new MessageUtils(periodsStore, localeRU);
+        MessageUtils messZA = new MessageUtils(periodsStore, localeZA);
         //WHEN
-        String resultUA = Main.getGreeting(localeUA, periodsStore, 0);
-        String resultGB = Main.getGreeting(localeGB, periodsStore, 1);
-        String resultRU = Main.getGreeting(localeRU, periodsStore, 2);
-        String resultZA = Main.getGreeting(localeZA, periodsStore, 3);
+        String resultUA = messUA.getGreeting(0);
+        String resultGB = messGB.getGreeting(1);
+        String resultRU = messRU.getGreeting(2);
+        String resultZA = messZA.getGreeting(3);
         //THEN
         Assertions.assertEquals("Доброго ранку, Світ! - 6:00 - 9:00", resultUA);
         Assertions.assertEquals("Good day, World! - 9:00 - 19:00", resultGB);

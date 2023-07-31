@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class PeriodsStoreTest {
+    /**
+     * This method tests getting period of day - getPeriod
+     */
     @Test
-    public void test(){
+    public void test_getting_period_of_day(){
         //GIVEN
         PeriodsStore periodsStore = new PeriodsStore();
         int hourM = 7;
